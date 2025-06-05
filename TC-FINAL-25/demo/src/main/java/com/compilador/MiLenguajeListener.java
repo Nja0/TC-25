@@ -28,6 +28,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitSentencia(MiLenguajeParser.SentenciaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#sentenciaanidas}.
+	 * @param ctx the parse tree
+	 */
+	void enterSentenciaanidas(MiLenguajeParser.SentenciaanidasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#sentenciaanidas}.
+	 * @param ctx the parse tree
+	 */
+	void exitSentenciaanidas(MiLenguajeParser.SentenciaanidasContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#sentenciaWhile}.
 	 * @param ctx the parse tree
 	 */
@@ -58,16 +68,6 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitSentenciaIf(MiLenguajeParser.SentenciaIfContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiLenguajeParser#bloque}.
-	 * @param ctx the parse tree
-	 */
-	void enterBloque(MiLenguajeParser.BloqueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiLenguajeParser#bloque}.
-	 * @param ctx the parse tree
-	 */
-	void exitBloque(MiLenguajeParser.BloqueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#declaracionFuncion}.
 	 * @param ctx the parse tree
 	 */
@@ -77,6 +77,26 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclaracionFuncion(MiLenguajeParser.DeclaracionFuncionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#funcion}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncion(MiLenguajeParser.FuncionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#funcion}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncion(MiLenguajeParser.FuncionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#bloque}.
+	 * @param ctx the parse tree
+	 */
+	void enterBloque(MiLenguajeParser.BloqueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#bloque}.
+	 * @param ctx the parse tree
+	 */
+	void exitBloque(MiLenguajeParser.BloqueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#parametros}.
 	 * @param ctx the parse tree

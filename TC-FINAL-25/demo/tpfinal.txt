@@ -1,10 +1,10 @@
-int i = 0;
-int x = 0;
 
-for (int i = 0; i < 10; i = i + 1) {
-    x = x + i;
+int suma(int a, int b) {
+    int sum = a + b;
+        if (i == 5) {
+            i = 2;
+        }
+        return sum;
+
 }
 
-while ( i == 3) {
-    x = x + i;
-}

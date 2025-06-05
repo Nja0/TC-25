@@ -5,15 +5,18 @@ programa
     ;
 
 sentencia
-    : sentenciaIf
-    | sentenciaWhile
-    | sentenciaFor
-    | declaracionFuncion
+    :  declaracionFuncion
+    | funcion
     | declaracionVariable
     | asignacion
     | retorno
     ;
-
+sentenciaanidas:
+    sentenciaIf
+    | sentenciaWhile
+    | sentenciaFor
+    | sentencia
+    ;
 
 sentenciaWhile
     : WHILE PA expresion PC bloque
@@ -21,7 +24,7 @@ sentenciaWhile
 
 
 sentenciaFor
-    : FOR PA tipo asignacion PYC ID operadorBinario expresion PYC asignacion operadorBinario expresion PC bloque
+    : FOR PA tipo? asignacion PYC ID operadorBinario expresion PYC asignacion operadorBinario expresion PC bloque
     ;
 
 
@@ -29,13 +32,19 @@ sentenciaIf
     : IF PA expresion PC bloque (ELSE bloque)?
     ;
 
-bloque
-    : LA (sentencia)* LC
-    ;
 
 declaracionFuncion
-    : tipo ID PA parametros? PC bloque
+    : tipo expresion PA parametros? PC
     ;
+
+funcion
+    : tipo expresion PA parametros? PC bloque
+    ;
+
+bloque
+  : LA (sentenciaanidas)* LC
+  ;
+
 
 parametros
     : parametro (COMA parametro)*

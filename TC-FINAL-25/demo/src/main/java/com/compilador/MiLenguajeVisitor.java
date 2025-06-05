@@ -23,6 +23,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSentencia(MiLenguajeParser.SentenciaContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#sentenciaanidas}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSentenciaanidas(MiLenguajeParser.SentenciaanidasContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#sentenciaWhile}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -41,17 +47,23 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSentenciaIf(MiLenguajeParser.SentenciaIfContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#bloque}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBloque(MiLenguajeParser.BloqueContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#declaracionFuncion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDeclaracionFuncion(MiLenguajeParser.DeclaracionFuncionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#funcion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncion(MiLenguajeParser.FuncionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#bloque}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBloque(MiLenguajeParser.BloqueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#parametros}.
 	 * @param ctx the parse tree
