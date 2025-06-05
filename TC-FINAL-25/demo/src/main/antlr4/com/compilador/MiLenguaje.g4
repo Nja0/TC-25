@@ -1,32 +1,90 @@
 grammar MiLenguaje;
 
 programa
-    : (s)* EOF
+    : (sentencia)* EOF
     ;
 
-s : IF c THEN  s (ELSE s)?
-  | a
-  ;
+sentencia
+    : sentenciaIf
+    | sentenciaWhile
+    | sentenciaFor
+    | declaracionFuncion
+    | declaracionVariable
+    | asignacion
+    | retorno
+    ;
 
-c : e RELOP e 
-  | TRUE
-  | FALSE
-  ;
 
-e : e SUM t
-  | t
-  ;
+sentenciaWhile
+    : WHILE PA expresion PC bloque
+    ;
 
-t : f
-  | t MUL f
-  ;
 
-f : ID
-  | INTEGER
-  | PA e PC
-  ;
+sentenciaFor
+    : FOR PA tipo asignacion PYC ID operadorBinario expresion PYC asignacion operadorBinario expresion PC bloque
+    ;
 
-a : ID ASSING e ;
+
+sentenciaIf
+    : IF PA expresion PC bloque (ELSE bloque)?
+    ;
+
+bloque
+    : LA (sentencia)* LC
+    ;
+
+declaracionFuncion
+    : tipo ID PA parametros? PC bloque
+    ;
+
+parametros
+    : parametro (COMA parametro)*
+    ;
+
+parametro
+    : tipo ID
+    ;
+
+declaracionVariable
+    : tipo ID (IGUAL expresion)? PYC
+    ;
+
+
+asignacion
+    : ID IGUAL expresion PYC?
+    ;
+
+retorno
+    : RETURN expresion? PYC
+    ;
+
+tipo
+    : INT
+    | CHAR
+    | DOUBLE
+    | VOID
+    ;
+
+expresion
+    : expresion operadorBinario expresion     #expBinaria
+    | NOT expresion                           #expNegacion
+    | PA expresion PC                         #expParentizada
+    | ID                                      #expVariable
+    | INTEGER                                 #expEntero
+    | DECIMAL                                 #expDecimal
+    | CHARACTER                               #expCaracter
+    | ID PA argumentos? PC                    #expFuncion
+    ;
+
+operadorBinario
+    : SUM | RES | MUL | DIV | MOD
+    | MAYOR | MAYOR_IGUAL | MENOR | MENOR_IGUAL | EQL | DISTINTO
+    | AND | OR
+    ;
+    
+argumentos
+    : expresion (COMA expresion)*
+    ;
 
 PA   : '(' ;
 PC   : ')' ;
@@ -37,9 +95,6 @@ LC   : '}' ;
 
 PYC  : ';' ;
 COMA : ',' ;
-
-ASSING : ':=' ;
-RELOP : 'relop' ;
 
 IGUAL : '=' ;
 
@@ -56,9 +111,6 @@ MUL  : '*' ;
 DIV  : '/' ;
 MOD  : '%' ;
 
-TRUE : 'true' ;
-FALSE : 'false' ;
-
 OR   : '||' ;
 AND  : '&&' ;
 NOT  : '!'  ;
@@ -68,8 +120,6 @@ WHILE : 'while' ;
 
 IF    : 'if' ;
 ELSE  : 'else' ;
-
-THEN : 'then' ;
 
 INT     : 'int' ;
 CHAR    : 'char' ;
