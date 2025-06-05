@@ -1,76 +1,33 @@
 grammar MiLenguaje;
 
 programa
-    : (sentencia)* EOF
+    : (s)* EOF
     ;
 
-sentencia
-    : sentenciaIf
-    | declaracionFuncion
-    | declaracionVariable
-    | asignacion
-    | retorno
-    ;
+s : IF c THEN  s (ELSE s)?
+  | a
+  ;
 
-sentenciaIf
-    : IF PA expresion PC bloque (ELSE bloque)?
-    ;
+c : e RELOP e 
+  | TRUE
+  | FALSE
+  ;
 
-bloque
-    : LA (sentencia)* LC
-    ;
+e : e SUM t
+  | t
+  ;
 
-declaracionFuncion
-    : tipo ID PA parametros? PC bloque
-    ;
+t : f
+  | t MUL f
+  ;
 
-parametros
-    : parametro (COMA parametro)*
-    ;
+f : ID
+  | INTEGER
+  | PA e PC
+  ;
 
-parametro
-    : tipo ID
-    ;
+a : ID ASSING e ;
 
-declaracionVariable
-    : tipo ID PYC
-    ;
-
-asignacion
-    : ID IGUAL expresion PYC
-    ;
-
-retorno
-    : RETURN expresion? PYC
-    ;
-
-tipo
-    : INT
-    | CHAR
-    | DOUBLE
-    | VOID
-    ;
-
-expresion
-    : expresion operadorBinario expresion     #expBinaria
-    | NOT expresion                           #expNegacion
-    | PA expresion PC                         #expParentizada
-    | ID                                      #expVariable
-    | INTEGER                                 #expEntero
-    | DECIMAL                                 #expDecimal
-    | CHARACTER                               #expCaracter
-    | ID PA argumentos? PC                    #expFuncion
-    ;
-
-operadorBinario
-    : SUM | RES | MUL | DIV | MOD
-    | MAYOR | MAYOR_IGUAL | MENOR | MENOR_IGUAL | EQL | DISTINTO
-    | AND | OR
-    ;
-    
-argumentos
-    : expresion (COMA expresion)*
-    ;
 PA   : '(' ;
 PC   : ')' ;
 CA   : '[' ;
@@ -80,6 +37,9 @@ LC   : '}' ;
 
 PYC  : ';' ;
 COMA : ',' ;
+
+ASSING : ':=' ;
+RELOP : 'relop' ;
 
 IGUAL : '=' ;
 
@@ -96,6 +56,9 @@ MUL  : '*' ;
 DIV  : '/' ;
 MOD  : '%' ;
 
+TRUE : 'true' ;
+FALSE : 'false' ;
+
 OR   : '||' ;
 AND  : '&&' ;
 NOT  : '!'  ;
@@ -105,6 +68,8 @@ WHILE : 'while' ;
 
 IF    : 'if' ;
 ELSE  : 'else' ;
+
+THEN : 'then' ;
 
 INT     : 'int' ;
 CHAR    : 'char' ;
